@@ -1,10 +1,11 @@
 /**
  * @author Nathalia Ferrari
+ * Classe main que inicializa o jogo
  */
 public class PrincipalBaralho
 {
     public static void main(String[] args) {
-        Jogo jogo = new Jogo(5);
+        Controle jogo = new Controle(5);
         jogo.comeca();
 
     }

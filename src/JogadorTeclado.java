@@ -1,5 +1,6 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que possui as funcoes necessarias para o Jogador Teclado
  */
 public class JogadorTeclado extends Jogador {
 

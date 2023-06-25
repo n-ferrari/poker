@@ -3,7 +3,7 @@
  */
 public class Pote {
     private int valor = 0;
-    private int ultimaAposta = 1; // inicia com 1 que é o valor mínimo de aposta
+    private int ultimaAposta = 10; // inicia com 10 que é o valor mínimo de aposta
     private int repeteAposta = 0;
 
     public int getValor() {

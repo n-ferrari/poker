@@ -2,12 +2,13 @@
  * @author Nathalia Ferrari
  */
 
-public class Jogo {
+public class Controle {
     private Baralho baralho;
     private Jogador[] jogadores;
     private Pote pote = new Pote();
 
-    public Jogo(int numJogadores) {
+    //Contrutor do jogo. Inicia todos os jogadores com nomes padrões e o Jogador Teclado
+    public Controle(int numJogadores) {
         String[] name = {"Ze","Joao","Maria","Fernando"};
         this.jogadores = new Jogador[numJogadores];
         for (int i = 0; i < (jogadores.length - 1); i++) {
@@ -16,6 +17,7 @@ public class Jogo {
         jogadores[numJogadores - 1] = new JogadorTeclado("Você");
     }
 
+    // Função que apresenta a lógica do jogo
     public void comeca() {
         System.out.println("Início do jogo");
         while(!fimDeJogo()){
@@ -27,15 +29,12 @@ public class Jogo {
             apostasIniciais();
             //imprimeInfoJogo();
             trocaCarta();
-
             rodadaAposta();
-
             //imprimeInfoJogo();
             resultado();
             //imprimeInfoJogo();
             atualizaJogadores();
             //imprimeInfoJogo();
-
         }
 
     }
@@ -47,7 +46,7 @@ public class Jogo {
         }
         System.out.println(numCartas + " cartas foram distribuídas para cada jogador.");
     }
-
+    //Imprime as informaçoes dos jogadores. SM inicia na posição 0 do array, BB na posição 1 e dealer na última posição
     private void imprimeInfoJogadores() {
         for (int i = 0; i < jogadores.length; i++) {
             System.out.print("\n"+jogadores[i].getName());
@@ -63,7 +62,7 @@ public class Jogo {
             jogadores[i].imprimeInfoJogador();
         }
     }
-
+    // realiza a aposta do SM e do BB
     private void apostasIniciais() {
         System.out.println("\nEtapa 2: Aposta iniciais.");
         int apostaSB;
@@ -104,7 +103,7 @@ public class Jogo {
         }
     }
 
-    //rodada comeca logo após o BB
+    //rodada após aposta do BB
     private void rodadaAposta() {
         boolean terminouApostas = false;
 
@@ -131,6 +130,7 @@ public class Jogo {
         System.out.println("Apostas encerradas!");
     }
 
+    // realiza aposta caso o jogador nao tenha desistido e tenha fichas
     private void aposta(int i) {
         if (jogadores[i].getFichas() != 0 && jogadores[i].isVivo()) {
             if(!(jogadores[i] instanceof JogadorTeclado)){
@@ -142,6 +142,7 @@ public class Jogo {
         }
     }
 
+    // funcao que verifica se a rodade de apostas terminou (Apenas um jogador vivo e com fichas ou apostas iguais)
     private boolean terminouApostas() {
         int vivos = 0;
         int vivoEtemFicha = 0;
@@ -164,6 +165,7 @@ public class Jogo {
         return ((pote.getRepeteAposta() + 1) == vivos || vivos <= 1 || vivoEtemFicha < 2);
     }
 
+    //calcula o resultado da rodada baseado na pontuação de cada jogo e distribui fichas
     private void resultado() {
 
         int[] pontuacao = new int[5];

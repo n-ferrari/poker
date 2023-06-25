@@ -1,8 +1,10 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que calcula o resultado de cada jogo de poker de 5 cartas
  */
 public class Resultado {
 
+    //funcao retorna pontos de acordo com a força do jogo
     public static int resultado(Carta[] carta){
         if(royalFlush(carta)){
             System.out.println("Royal Flush");
@@ -147,7 +149,6 @@ public class Resultado {
         return par == 2;
     }
 
-
     public static boolean straight(Carta[] carta) {
         ordenar(carta);
         for (int i = 0; i < (carta.length - 1); i++) {
@@ -173,7 +174,7 @@ public class Resultado {
         return true;
     }
 
-
+    //ordena as cartas de acordo com a numeracao
     public static Carta[] ordenar(Carta[] carta){
         Carta cartaAux;
         boolean troca = true;
@@ -191,6 +192,7 @@ public class Resultado {
         return carta;
     }
 
+    //retorna a carta mais alta
     public static int cartaAlta(Carta[] carta){
         ordenar(carta);
         if(carta[0].getNumero() == 1){

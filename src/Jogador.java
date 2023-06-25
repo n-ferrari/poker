@@ -1,14 +1,16 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que possui os parametros e funcoes de um jogador automatico
  */
 import java.util.Random;
 public class Jogador {
-    private static int seed = 2;
+    //private static int seed = 2;
     private int fichas = 200;
     private boolean vivo = true;
     private Carta cartas[] = new Carta[5];
     private String name;
-    private static Random random = new Random(seed);
+    //private static Random random = new Random(seed);
+    private static Random random = new Random();
 
 
     public Jogador(String name) {
@@ -63,6 +65,7 @@ public class Jogador {
         System.out.println();
     }
 
+    //funcao que realiza a aposta de um jogador automatico e retorna o valor da aposta
     public int aposta(int ultimaAposta){
         if(!this.vivo){
             return 0;
@@ -82,17 +85,18 @@ public class Jogador {
         return aposta;
     }
 
-
+    // iguala a aposta anterior
     protected int igualaAposta(int ultimaAposta) {
         if (this.fichas >= ultimaAposta) {
             System.out.println(" igualou aposta de valor " + ultimaAposta);
             this.fichas -= ultimaAposta;
             return ultimaAposta;
         } else {
-            return apostaMenorValor();
+            return apostaMenorValor(); // se nao há fichas suficientes, coloca todas as fichas que possui
         }
     }
 
+    //aumenta a aposta anterior
     private int aumentaAposta(int ultimaAposta) {
         //aumenta aposta ou coloca todas as fichas se não tem suficiente
         int aposta;
@@ -106,6 +110,7 @@ public class Jogador {
         return aposta;
     }
 
+    //se nao há fichas suficientes, aposta todas as fichas que tem
     protected int apostaMenorValor(){
         System.out.println(" não possui fichas para igualar e jogou todas as suas fichas");
         int aposta = this.fichas;
@@ -118,6 +123,7 @@ public class Jogador {
         setVivo(false);
     }
 
+    //remove cartas aleatoriamente para o jogador automatico
     public int removeCartas() {
         int quantCartasTrocadas = 0;
         for (int j = 0; j < 5; j++) {
@@ -130,6 +136,7 @@ public class Jogador {
         return quantCartasTrocadas;
     }
 
+    // recebe cartas faltantes do baralho
     public void recebeCartas(Carta[] cartasNovas){
         int i = 0;
         for (int j = 0; j < 5; j++) {
@@ -140,6 +147,7 @@ public class Jogador {
         }
     }
 
+    //incrementa fichas caso ganhe rodada
     public void incrementa(int valorIncremento){
         this.setFichas(valorIncremento + this.getFichas());
     }
