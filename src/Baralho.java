@@ -1,10 +1,11 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que possui as funcoes do baralho
  */
 import java.util.Random;
 public class Baralho
 {
-    private static int seed = 1;
+    //private static int seed = 1;
     private Carta arrayCarta[] = new Carta[52];
 
     int num = 1;
@@ -41,7 +42,8 @@ public class Baralho
         }
     }
     public void embaralha(){
-        Random random = new Random(seed);
+        //Random random = new Random(seed);
+        Random random = new Random();
         Carta cartaAuxiliar;
         for (int i = 0 ; i < 52; i++){
             int pos1 = (random.nextInt(52));

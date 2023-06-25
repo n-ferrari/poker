@@ -1,5 +1,6 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que possui os parametros e funcoes do pote
  */
 public class Pote {
     private int valor = 0;
@@ -31,11 +32,6 @@ public class Pote {
         if (ultimaAposta > this.ultimaAposta){
             this.ultimaAposta = ultimaAposta;
         }
-    }
-
-    public void zerar(){
-        this.valor = 0;
-        this.ultimaAposta = 1;
     }
 
     public void fazAposta(int valorIncremento){

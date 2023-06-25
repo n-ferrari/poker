@@ -1,5 +1,6 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que possui os parametros das cartas
  */
 public class Carta
 {
