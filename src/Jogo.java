@@ -1,5 +1,6 @@
 /**
  * @author Nathalia Ferrari
+ * Classe que possui todos os parametros e funcoes do jogo
  */
 
 public class Jogo {
@@ -78,7 +79,7 @@ public class Jogo {
         }
     }
 
-    private void imprimeInfoJogo() {
+    public void imprimeInfoJogo() {
         pote.toString();
         imprimeInfoJogadores();
     }
@@ -86,10 +87,12 @@ public class Jogo {
     public void trocaCarta() {
         System.out.println("\nEtapa 3: Troca de cartas.");
         for (int i = 0; i < jogadores.length; i++) {
-            int cartasASacar = jogadores[i].removeCartas();
-            Carta[] cartasNovas = baralho.daCartas(cartasASacar);
-            jogadores[i].recebeCartas(cartasNovas);
-            System.out.println(jogadores[i].getName() + " trocou " + cartasASacar + " cartas");
+            if(jogadores[i].isVivo()){
+                int cartasASacar = jogadores[i].removeCartas();
+                Carta[] cartasNovas = baralho.daCartas(cartasASacar);
+                jogadores[i].recebeCartas(cartasNovas);
+                System.out.println(jogadores[i].getName() + " trocou " + cartasASacar + " cartas");
+            }
         }
     }
 
@@ -100,6 +103,7 @@ public class Jogo {
         System.out.println("\nEtapa 4: Apostas");
 
         while (!terminouApostas) {
+            //começa aposta apos o big blind
             for (int i = 2; i < jogadores.length; i++) {
                 aposta(i);
                 terminouApostas = terminouApostas();
@@ -108,6 +112,7 @@ public class Jogo {
                 }
             }
             if (!terminouApostas) {
+                //continua aposta SM e BB
                 for (int i = 0; i < 2; i++) {
                     aposta(i);
                     terminouApostas = terminouApostas();
@@ -202,19 +207,30 @@ public class Jogo {
     public void atualizaJogadores() {
         int jogadoresVivos = getJogadoresVivos();
         Jogador[] jogadoresNovaRodada = new Jogador[jogadoresVivos];
-
-        //cria um novo array com apenas os jogadores vivos e roda 1 vez
-        int j = 1;
-        for (int i = 0; i < this.jogadores.length; i++) {
-            if (this.jogadores[i].getFichas() > 0) {
-                this.jogadores[i].setVivo(true);
-                if (jogadoresVivos != 1) {
-                    jogadoresNovaRodada[j] = this.jogadores[i];
-                    j++;
-                    jogadoresVivos--;
-                } else {
-                    jogadoresNovaRodada[0] = this.jogadores[i];
-                    break;
+        int k = 0;
+        if (jogadoresVivos  == 2){
+            //cria um novo array com apenas os jogadores vivos e nao roda caso o numero de jogadores seja 2
+            for (int i = 0; i < this.jogadores.length; i++) {
+                if (this.jogadores[i].getFichas() > 0) {
+                    this.jogadores[i].setVivo(true);
+                        jogadoresNovaRodada[k] = this.jogadores[i];
+                        k++;
+                    }
+                }
+        }else{
+            int j = 1;
+            //cria um novo array com apenas os jogadores vivos e roda 1 vez caso jogadores vivos > 2
+            for (int i = 0; i < this.jogadores.length; i++) {
+                if (this.jogadores[i].getFichas() > 0) {
+                    this.jogadores[i].setVivo(true);
+                    if (jogadoresVivos != 1) {
+                        jogadoresNovaRodada[j] = this.jogadores[i];
+                        j++;
+                        jogadoresVivos--;
+                    } else {
+                        jogadoresNovaRodada[0] = this.jogadores[i];
+                        break;
+                    }
                 }
             }
         }

@@ -100,7 +100,7 @@ public class Jogador {
     private int aumentaAposta(int ultimaAposta) {
         //aumenta aposta ou coloca todas as fichas se não tem suficiente
         int aposta;
-        if (this.fichas > ultimaAposta) {
+        if (this.fichas > (ultimaAposta + 1)) {
             aposta = this.random.nextInt((ultimaAposta + 1), this.fichas);
             System.out.println(" aumentou aposta para " + aposta);
             this.fichas -= aposta;

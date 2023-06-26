@@ -1,6 +1,6 @@
 /**
  * @author Nathalia Ferrari
- * Classe main que inicializa o jogo
+ * Classe main que inicializa o jogo e possui a logica
  */
 public class Controle {
     public static void main(String[] args) {
